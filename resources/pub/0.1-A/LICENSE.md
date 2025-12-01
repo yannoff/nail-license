@@ -1,22 +1,8 @@
 # NAIL License
 
-_The **N**o-**A**rtificial-**I**ntelligence **L**icense._
+_HINT: The underlined text parts are replaceable. (See [SPDX matching guidelines](https://spdx.github.io/spdx-spec/v2.3/license-matching-guidelines-and-templates/#b34-guideline-replaceable-text) for more._
 
-**Latest published draft: <license-link>[0.1-A](/resources/pub/0.1-A/LICENSE.md)</license-link>**
-
-## Purpose
-
-Based on the [MIT License](https://spdx.org/licenses/MIT.html), the **NAIL License** aims at addressing the lack of deep-learning / AI devices regulation, meanwile conforming as much as possible to the [OSD Principles](/osd.md).
-
-## Semver Policy
-
-Each proposed version comes in the following form: `<major>.<minor>-<variant>` _(eg: `0.1-A`)_.
-
-There may be several concurrent variations of the same license version, identified by a variant letter.
-
-Once a variant has been retained for release, it will become the definitive license, with a `<major>.<minor>` version number.
-
-## License text <license-version>(version 0.1-A)</license-version>
+---
 
 <license-text>
 The NAIL License<br/><br/>
