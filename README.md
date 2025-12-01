@@ -4,6 +4,8 @@ _The **N**o-**A**rtificial-**I**ntelligence **L**icense._
 
 **Latest published draft: <license-link>[0.1-A](/resources/pub/0.1-A/LICENSE.md)</license-link>**
 
+_See the [draft changelog](/resources/drafts/changelog.md) for a (nightly) overview of versions/variants differences_.
+
 ## Purpose
 
 Based on the [MIT License](https://spdx.org/licenses/MIT.html), the **NAIL License** aims at addressing the lack of deep-learning / AI devices regulation, meanwile conforming as much as possible to the [OSD Principles](/osd.md).

@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Display a diff-formatted comparison between 2 drafts,
+# suitable for changelog markdown files update
+#
+
+draftdir=resources/drafts
+
+#
+# Infer the draft path from the given version
+#
+# $1: version number
+#
+_get_draft(){
+    local v=$1
+    echo "${draftdir}/${v}.md";
+}
+
+#
+# Check whether the given version exists in drafts
+#
+# $1: version number
+#
+_check_version(){
+    local v=$1 d=$(_get_draft ${1})
+    [ ! -f "${d}" ] && { echo "Error: could not find a draft license at version '${v}' (path: '${d}'). Exiting."; exit 1; }
+}
+
+v1=$1
+v2=$2
+
+[ -z "${v1}" -o -z "${v2}" ] && { echo -e "Usage:\n\t$(basename $0) <version1> <version2>"; exit 1; }
+
+_check_version "${v1}"
+_check_version "${v2}"
+
+echo -e "\033[01;30mdiff -uwb $(_get_draft "${v1}") $(_get_draft "${v2}")\033[00m" >&2
+echo
+echo "### Changes between ${v1} and ${v2}"
+echo
+echo "\`\`\`diff"
+diff -uwb $(_get_draft "${v1}") $(_get_draft "${v2}")
+echo "\`\`\`"
