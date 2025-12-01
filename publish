@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# Generate markdown and text version of the given license draft
+# in the resources/pub/ directory
+#
+
+#
+# Display the text wrapped between <license-text/> tags from the given file
+#
+# $1: markdown source file
+#
+_extract(){
+    local src=$1
+    awk '/<license-text>/,/<\/license-text>/ {
+        if ($1 !~ "</?license-text>") {
+            print;
+        } 
+    }' ${src}
+}
+
+version=$1
+
+[ -z "${version}" ] && { printf "Usage:\n\t%s <version>\n" $(basename $0); exit 1; }
+
+src=resources/drafts/${version}.md
+pub=resources/pub/${version}
+
+[ -f "${src}" ] || { printf "Error: could not find '%s' file.\n", ${src}; exit 1; }
+
+if [ ! -d "${pub}" ]
+then
+    echo "Creating publication directory: ${pub}"
+    mkdir -p ${pub}
+fi
+
+echo "Copying draft to publication '${pub}' directory..."
+echo -ne "\033[01;30m"
+cp -v ${src} ${pub}/LICENSE.md
+echo -ne "\033[00m"
+
+txt=${pub}/LICENSE.txt
+
+echo "Building '${txt}' plain-text license file..."
+plain=$(_extract ${src})
+echo "${plain}" | awk '{
+    # Remove <ins/> and <br/> tags
+    gsub("<([^>]*)>", "");
+    # Convert back html entities
+    gsub("&lt;", "<");
+    gsub("&gt;", ">");
+    print;
+}' > ${txt}
+
+echo -ne "\033[01;30m"
+cat ${txt}
+echo -ne "\033[00m"
+
+# Update license text and link in README
+echo "Updating front documentation license data..."
+# Update license version
+sed -i "s!<license-version>.*</license-version>!<license-version>(version ${version}</license-version>!" README.md
+# Update license link
+awk -v "version=${version}" '{ gsub("<license-link>(.*)</license-link>", sprintf("<license-link>[%1$s](/resources/pub/%1$s/LICENSE.md)</license-link>", version)); print; }' README.md > README.tmp
+mv README.tmp README.md
+# Update license text
+sed -i "/<license-text>/,/<\/license-text>/ D" README.md
+echo -e "<license-text>\n${plain}\n</license-text>" >> README.md
+

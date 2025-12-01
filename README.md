@@ -2,7 +2,7 @@
 
 _The **N**o-**A**rtificial-**I**ntelligence **L**icense._
 
-**Latest published version: <license-link>[version](/resources/pub/)</license-link>**
+**Latest published draft: <license-link>[version](/resources/pub/)</license-link>**
 
 ## Purpose
 
