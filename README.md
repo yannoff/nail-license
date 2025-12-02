@@ -18,6 +18,13 @@ There may be several concurrent variations of the same license version, identifi
 
 Once a variant has been retained for release, it will become the definitive license, with a `<major>.<minor>` version number.
 
+## Available drafts
+
+<drafts>
+
+- [0.1-A](/resources/drafts/0.1-A.md)
+</drafts>
+
 ## License text <license-version>(version 0.1-A)</license-version>
 
 <license-text>

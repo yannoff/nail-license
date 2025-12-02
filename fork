@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Generate a new draft from the given source draft
+#
+
+draftdir=resources/drafts
+
+#
+# Infer the draft path from the given version
+#
+# $1: version number
+#
+_get_draft(){
+    local v=$1
+    echo "${draftdir}/${v}.md";
+}
+
+[ -z "${1}" -o -z "${2}" ] && { echo -e "Usage:\n\t$(basename $0) <source-draft> <new-draft>"; exit 1; }
+
+src=$(_get_draft $1)
+dst=$(_get_draft $2)
+
+[ -f "${dst}" ] && { echo "Warning: an existing draft has been found in '${dst}'. Aborting."; exit 1; }
+
+echo "Creating new fork draft at '${dst}'..."
+echo -ne "\033[01;30m"
+cp -v ${src} ${dst}
+echo -ne "\033[00m"
+
+drafts=()
+for f in $(find ${draftdir} -name '[0-9].*.md' | sort)
+do
+    drafts+=("\- [$(basename $f .md)](/$f)\n")
+done
+
+echo "Updating front documentation drafts list..."
+sed "/<drafts>/,/<\/drafts>/ c <drafts>\n\n${drafts[*]}<\/drafts>" README.md
