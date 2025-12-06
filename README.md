@@ -24,6 +24,7 @@ Once a variant has been retained for release, it will become the definitive lice
 
 - [0.1-A](/resources/drafts/0.1-A.md)
  - [0.1-B](/resources/drafts/0.1-B.md)
+ - [0.1-C](/resources/drafts/0.1-C.md)
 </drafts>
 
 ## License text <license-version>(version 0.1-A)</license-version>
