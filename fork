@@ -34,4 +34,4 @@ do
 done
 
 echo "Updating front documentation drafts list..."
-sed "/<drafts>/,/<\/drafts>/ c <drafts>\n\n${drafts[*]}<\/drafts>" README.md
+sed -i "/<drafts>/,/<\/drafts>/ c <drafts>\n\n${drafts[*]}<\/drafts>" README.md
