@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Generate a new release from the given published draft
+#
+
+draft=$1
+
+[ -z "${draft}" ] && { printf "Usage:\n\t%s <draft-version>\n" $(basename $0); exit 1; }
+
+release=${draft%%-[A-Z]}
+
+src=resources/pub/${draft}
+out=releases/${release}
+
+[ -d "${src}" ] || { printf "Error: could not find the '%s' directory.\n", ${src}; exit 1; }
+
+echo "Using version '${draft}' for '${out}' release..."
+echo -ne "\033[01;30m"
+cp -rv ${src} ${out}
+echo -ne "\033[00m"
